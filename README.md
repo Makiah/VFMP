@@ -1,9 +1,8 @@
 # Vector Field Motion Profiling
-➡ An original take on motion profiling, by overlaying vector fields.  
 
-This module contains tools for generating these fields, as well as a HTML5/JS viewing utility.  I'll probably make this a submodule at some point, once it works effectively.  
+This module uses a bunch of Python math libs to create fields which profile to a curve.  
 
-From what I can gather, path generation is as easy as saying
+From what I can gather through experimental results, path generation via fields are simple: 
 ```
 y = ax^3 + bx^2 + cx + d
 F_x(x, y) = (-dy/dx + 1)(-y + ax^3 + bx^2 + cx + d) + x solved for y
