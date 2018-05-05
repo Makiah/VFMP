@@ -2,14 +2,14 @@
 
 *Please note that this is incomplete, but explains the general idea behind using vector fields to profile a curve.* 
 
-This module uses a bunch of Python math libs to create fields which profile to a curve.  
-
-From what I can gather through experimental results, path generation via fields are simple: 
+From what I can gather through experimental results, path generation via vector fields are simple: 
 ```
 y = ax^3 + bx^2 + cx + d
 F_x(x, y) = (-dy/dx + 1)(-y + ax^3 + bx^2 + cx + d) + x solved for y
 F_y(x, y) = (-dx/dy + 1)(-y + ax^3 + bx^2 + cx + d) + y solved for x
 ```
+
+These fields can be used to profile a robot to a given spline, provided you know the equation for the spline and the robot's approximate <x,y> position vector.  
 
 ## Example of field generation
 ![Example GIF](example/example.gif)
