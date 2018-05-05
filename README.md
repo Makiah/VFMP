@@ -9,7 +9,23 @@ F_x(x, y) = (-dy/dx + 1)(-y + ax^3 + bx^2 + cx + d) + x solved for y
 F_y(x, y) = (-dx/dy + 1)(-y + ax^3 + bx^2 + cx + d) + y solved for x
 ```
 
-## Original Work
+## Example of field generation
+![Example GIF](example/example.gif)
+
+## Desmos-Based Example
+
+Now uses derivative as a coefficient for more advanced correction
+
+### XY Correction 
+![Combined Correction](example/sine/xycorrection.png)
+
+### Path Correction 
+![Combined Correction](example/sine/pathcorrection.png)
+
+### XY Correction 
+![Combined Correction](example/sine/combinedcorrection.png)
+
+## Legacy Work
 
 ### X Correction
 ![X Correction](example/parabola/xcorrection.png)
@@ -25,16 +41,3 @@ F_y(x, y) = (-dx/dy + 1)(-y + ax^3 + bx^2 + cx + d) + y solved for x
 
 ### Combined Correction
 ![Combined Correction](example/parabola/combinedcorrection.png)
-
-## Improved Work
-
-Now uses derivative as a coefficient for more advanced correction
-
-### XY Correction 
-![Combined Correction](example/sine/xycorrection.png)
-
-### Path Correction 
-![Combined Correction](example/sine/pathcorrection.png)
-
-### XY Correction 
-![Combined Correction](example/sine/combinedcorrection.png)
