@@ -5,17 +5,15 @@ from sympy import *
 # The axes displayed on the graph.  
 plt.axes([0.025, 0.025, 0.95, 0.95])
 WIDTH = 40
-HEIGHT = 8
+HEIGHT = 30
 
 # Use the amazingness of sympy to figure out the spline to use.  
-spline_string = input("f(x,y) = y = ")
+spline_string = input("f(x) = y = ")
 spline_parsed = sympify(spline_string)
 
 # Interpret the spline
 x = Symbol("x")
-# y = Symbol("y")
 print("Parsed function is " + str(spline_parsed))
-# print("x = 0 and y = 0 is " + str(spline_parsed.subs({x: 0, y: 0})))
 
 # GRAPHING ACTUAL FUNCTION
 x_vals = np.arange(0, WIDTH, .1)
@@ -24,10 +22,16 @@ y_vals = lam_x(x_vals - (WIDTH - 1) / 2) + (HEIGHT - 1) / 2
 plt.plot(x_vals, y_vals)
 
 # GRAPHING VECTOR FIELD 
-dfdx = diff(spline_parsed, x)
-# dfdy = diff(spline_parsed, y)
+print("")
+y = Symbol("y")
+actual_equation = sympify(str(spline_parsed) + " - y")
+print("Actually using equation f(x,y) = " + str(actual_equation))
+dfdx = diff(actual_equation, x)
+dfdy = diff(actual_equation, y)
 print("df/dx = " + str(dfdx)) # AWESOME
-# print("df/dy = " + str(dfdy))
+print("df/dy = " + str(dfdy))
+print("x solved for y: " + str(solve(actual_equation, y)))
+print("y solved for x: " + str(solve(actual_equation, x)))
 
 # The grid size, the arrows will be located on each of the grid points.  
 X, Y = np.mgrid[0:WIDTH, 0:HEIGHT]
