@@ -31,10 +31,10 @@ dfdy = diff(actual_equation, y)
 print("df/dx = " + str(dfdx)) # AWESOME
 print("df/dy = " + str(dfdy))
 
-xfory = solve(actual_equation, y)
+xfory = solve(actual_equation, y)[0]
 print("x solved for y: " + str(xfory))
 
-yforx = solve(actual_equation, x)
+yforx = solve(actual_equation, x)[0] # returns multiple
 print("y solved for x: " + str(yforx))
 
 # The grid size, the arrows will be located on each of the grid points.  
@@ -53,15 +53,17 @@ X_GRAPH, Y_GRAPH = X - (WIDTH - 1) / 2., Y - (HEIGHT - 1) / 2.
 dfdx_lam = lambdify([x, y], dfdx, modules=['numpy'])
 dfdy_lam = lambdify([x, y], dfdy, modules=['numpy'])
 actual_lam = lambdify([x, y], actual_equation, modules=['numpy'])
-U = -1 * dfdx_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH)
-V = -1 * dfdy_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH)
+yforx_lam = lambdify([x, y], yforx, modules=['numpy'])
+xfory_lam = lambdify([x, y], xfory, modules=['numpy'])
+U = -1 * dfdx_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH) + yforx_lam(X_GRAPH, np.abs(Y_GRAPH))
+V = -1 * dfdy_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH) + xfory_lam(X_GRAPH, Y_GRAPH)
 
 # Normalize the vector magnitudes to improve their appearance, otherwise we get weird, miniscule vectors.  
 R = np.sqrt(U**2+V**2)  # color of the vector
 U, V = U / R, V / R     # normalized x and y
 
 # Actually graph the vector field.  
-plt.quiver(X, Y, U, V, R)
+plt.quiver(X, Y, U, V, R, pivot="middle")
 # plt.quiver(X, Y, U, V, R, alpha=.5)
 # plt.quiver(X, Y, U, V, edgecolor='k', facecolor='None', linewidth=.5)
 
