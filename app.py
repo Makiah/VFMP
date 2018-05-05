@@ -10,6 +10,7 @@ HEIGHT = 30
 # Use the amazingness of sympy to figure out the spline to use.  
 spline_string = input("f(x) = y = ")
 spline_parsed = sympify(spline_string)
+lookahead_factor = float(input("lookahead (0-1): "))
 
 # Interpret the spline
 x = Symbol("x")
@@ -55,8 +56,8 @@ dfdy_lam = lambdify([x, y], dfdy, modules=['numpy'])
 actual_lam = lambdify([x, y], actual_equation, modules=['numpy'])
 yforx_lam = lambdify([x, y], yforx, modules=['numpy'])
 xfory_lam = lambdify([x, y], xfory, modules=['numpy'])
-U = -1 * dfdx_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH) + yforx_lam(X_GRAPH, np.abs(Y_GRAPH))
-V = -1 * dfdy_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH) + xfory_lam(X_GRAPH, Y_GRAPH)
+U = lookahead_factor * (-1 * dfdx_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH)) + (yforx_lam(X_GRAPH, np.abs(Y_GRAPH)))
+V = lookahead_factor * (-1 * dfdy_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH)) + (xfory_lam(X_GRAPH, Y_GRAPH))
 
 # Normalize the vector magnitudes to improve their appearance, otherwise we get weird, miniscule vectors.  
 R = np.sqrt(U**2+V**2)  # color of the vector
