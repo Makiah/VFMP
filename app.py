@@ -30,8 +30,12 @@ dfdx = diff(actual_equation, x)
 dfdy = diff(actual_equation, y)
 print("df/dx = " + str(dfdx)) # AWESOME
 print("df/dy = " + str(dfdy))
-print("x solved for y: " + str(solve(actual_equation, y)))
-print("y solved for x: " + str(solve(actual_equation, x)))
+
+xfory = solve(actual_equation, y)
+print("x solved for y: " + str(xfory))
+
+yforx = solve(actual_equation, x)
+print("y solved for x: " + str(yforx))
 
 # The grid size, the arrows will be located on each of the grid points.  
 X, Y = np.mgrid[0:WIDTH, 0:HEIGHT]
@@ -43,7 +47,14 @@ X, Y = np.mgrid[0:WIDTH, 0:HEIGHT]
 X_GRAPH, Y_GRAPH = X - (WIDTH - 1) / 2., Y - (HEIGHT - 1) / 2.
 
 # Define the two graph equations here, using X_GRAPH and Y_GRAPH as input parameters.  
-U, V = X_GRAPH*2, Y_GRAPH
+# u_eqn = lambdify([x, y], dfdx * actual_equation + yforx, modules=['numpy'])
+# v_eqn = lambdify([x, y], dfdy * actual_equation + xfory, modules=['numpy'])
+
+dfdx_lam = lambdify([x, y], dfdx, modules=['numpy'])
+dfdy_lam = lambdify([x, y], dfdy, modules=['numpy'])
+actual_lam = lambdify([x, y], actual_equation, modules=['numpy'])
+U = -1 * dfdx_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH)
+V = -1 * dfdy_lam(X_GRAPH, Y_GRAPH) * actual_lam(X_GRAPH, Y_GRAPH)
 
 # Normalize the vector magnitudes to improve their appearance, otherwise we get weird, miniscule vectors.  
 R = np.sqrt(U**2+V**2)  # color of the vector
