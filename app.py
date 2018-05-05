@@ -8,23 +8,26 @@ WIDTH = 40
 HEIGHT = 8
 
 # Use the amazingness of sympy to figure out the spline to use.  
-spline_string = input("f(x,y) = ")
+spline_string = input("f(x,y) = y = ")
 spline_parsed = sympify(spline_string)
 
 # Interpret the spline
 x = Symbol("x")
-y = Symbol("y")
+# y = Symbol("y")
 print("Parsed function is " + str(spline_parsed))
+# print("x = 0 and y = 0 is " + str(spline_parsed.subs({x: 0, y: 0})))
 
 # GRAPHING ACTUAL FUNCTION
-sin_x_vals = np.arange(0, WIDTH, .1)
-plt.plot(sin_x_vals, np.sin(sin_x_vals - (WIDTH - 1) / 2.) + (HEIGHT - 1) / 2.)
+x_vals = np.arange(0, WIDTH, .1)
+lam_x = lambdify(x, spline_parsed, modules=['numpy'])
+y_vals = lam_x(x_vals - (WIDTH - 1) / 2) + (HEIGHT - 1) / 2
+plt.plot(x_vals, y_vals)
 
 # GRAPHING VECTOR FIELD 
 dfdx = diff(spline_parsed, x)
-dfdy = diff(spline_parsed, y)
+# dfdy = diff(spline_parsed, y)
 print("df/dx = " + str(dfdx)) # AWESOME
-print("df/dy = " + str(dfdy))
+# print("df/dy = " + str(dfdy))
 
 # The grid size, the arrows will be located on each of the grid points.  
 X, Y = np.mgrid[0:WIDTH, 0:HEIGHT]
