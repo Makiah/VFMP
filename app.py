@@ -46,6 +46,9 @@ X, Y = np.mgrid[0:WIDTH, 0:HEIGHT]
 # Where the vector would be positioned on the x and y grid (the np.grid makes this weird)
 X_GRAPH, Y_GRAPH = X - (WIDTH - 1) / 2., Y - (HEIGHT - 1) / 2.
 
+# Print out the vector equation components
+print("Vector field: <(" + str(dfdx) + ") * (" + str(actual_equation) + ") + (" + str(yforx) + "), (" + str(dfdy) + ") * (" + str(actual_equation) + ") + (" + str(xfory) + ")>")
+
 # Use calculus I figured out experimentally to determine the vector x and y components.  SymPy makes this extremely easy.  
 dfdx_lam = lambdify([x, y], dfdx, modules=['numpy'])
 dfdy_lam = lambdify([x, y], dfdy, modules=['numpy'])
@@ -70,3 +73,4 @@ plt.yticks(())
 
 # Show the graph
 plt.show()
+
