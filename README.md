@@ -1,5 +1,7 @@
 # Vector Field Motion Profiling
 
+*Please note that this is incomplete, but explains the general idea behind using vector fields to profile a curve.* 
+
 This module uses a bunch of Python math libs to create fields which profile to a curve.  
 
 From what I can gather through experimental results, path generation via fields are simple: 
