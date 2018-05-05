@@ -2,7 +2,7 @@
 
 *Please note that this is incomplete, but explains the general idea behind using vector fields to profile a curve.* 
 
-From what I can gather through experimental results, path generation via vector fields are simple: 
+From what I can gather through experimental results, path generation via vector fields is simple: 
 ```
 y = ax^3 + bx^2 + cx + d
 F_x(x, y) = (-dy/dx + 1)(-y + ax^3 + bx^2 + cx + d) + x solved for y
