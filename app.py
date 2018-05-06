@@ -37,7 +37,7 @@ X, Y = np.mgrid[0:WIDTH, 0:HEIGHT]
 X_GRAPH, Y_GRAPH = X - (WIDTH - 1) / 2., Y - (HEIGHT - 1) / 2.
 
 # Print out the vector equation components
-print("Vector field: < -(" + str(dfdx) + ") * (" + str(spline_parsed) + ") + -(" + str(dfdy) + "), -(" + str(dfdy) + ") * (" + str(spline_parsed) + ") + (" + str(dfdx) + ")>")
+print("Vector field: < " + str(sympify("-(" + str(dfdx) + ") * (" + str(spline_parsed) + ") + -(" + str(dfdy) + ")")) + ", " + str(sympify("-(" + str(dfdy) + ") * (" + str(spline_parsed) + ") + (" + str(dfdx) + ")")) + ">")
 
 # Use calculus I figured out experimentally to determine the vector x and y components.  SymPy makes this extremely easy.  
 dfdx_lam = lambdify([x, y], dfdx, modules=['numpy'])
