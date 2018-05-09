@@ -2,12 +2,7 @@
 
 *Please note that this is incomplete, but explains the general idea behind using vector fields to profile a curve.* 
 
-From what I can gather through experimental results, path generation via vector fields is simple: 
-```
-y = ax^3 + bx^2 + cx + d
-F_x(x, y) = (-dy/dx + 1)(-y + ax^3 + bx^2 + cx + d) + x solved for y
-F_y(x, y) = (-dx/dy + 1)(-y + ax^3 + bx^2 + cx + d) + y solved for x
-```
+Path generation via vector fields is a simple multivariable calc formula, which you can view in `app.py`.  
 
 These fields can be used to profile a robot to a given spline, provided you know the equation for the spline and the robot's approximate <x,y> position vector.  
 
